@@ -72,8 +72,11 @@ public class PFinanceMain extends javax.swing.JFrame {
         tabelaMesRef = new javax.swing.JTable();
         tabPaneMovimentacao = new javax.swing.JTabbedPane();
         panelCustos = new javax.swing.JPanel();
-        scrollTabelaCustos = new javax.swing.JScrollPane();
-        tabelaCustos = new javax.swing.JTable();
+        jSplitPaneCaixa = new javax.swing.JSplitPane();
+        scrollTabelaCustosCredito = new javax.swing.JScrollPane();
+        tabelaCustosCredito = new javax.swing.JTable();
+        scrollTabelaCustosDebito = new javax.swing.JScrollPane();
+        tabelaCustosDebito = new javax.swing.JTable();
         panelResumo = new javax.swing.JPanel();
         panelTotalMes = new javax.swing.JPanel();
         lbTotalPrevistoMes = new javax.swing.JLabel();
@@ -145,8 +148,11 @@ public class PFinanceMain extends javax.swing.JFrame {
         internalCentralFrame.setVisible(true);
         internalCentralFrame.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        splitEsquerdo.setDividerLocation(200);
+        splitCentral.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        splitEsquerdo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         splitEsquerdo.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        splitEsquerdo.setResizeWeight(0.5);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         arvoreObjetos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -179,7 +185,11 @@ public class PFinanceMain extends javax.swing.JFrame {
 
         panelCustos.setLayout(new java.awt.BorderLayout());
 
-        tabelaCustos.setModel(new javax.swing.table.DefaultTableModel(
+        jSplitPaneCaixa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jSplitPaneCaixa.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPaneCaixa.setResizeWeight(0.5);
+
+        tabelaCustosCredito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -187,9 +197,24 @@ public class PFinanceMain extends javax.swing.JFrame {
 
             }
         ));
-        scrollTabelaCustos.setViewportView(tabelaCustos);
+        scrollTabelaCustosCredito.setViewportView(tabelaCustosCredito);
 
-        panelCustos.add(scrollTabelaCustos, java.awt.BorderLayout.CENTER);
+        jSplitPaneCaixa.setTopComponent(scrollTabelaCustosCredito);
+        scrollTabelaCustosCredito.getAccessibleContext().setAccessibleParent(jSplitPaneCaixa);
+
+        tabelaCustosDebito.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        scrollTabelaCustosDebito.setViewportView(tabelaCustosDebito);
+
+        jSplitPaneCaixa.setBottomComponent(scrollTabelaCustosDebito);
+
+        panelCustos.add(jSplitPaneCaixa, java.awt.BorderLayout.CENTER);
 
         panelResumo.setLayout(new java.awt.GridLayout(1, 3, 20, 0));
 
@@ -238,7 +263,7 @@ public class PFinanceMain extends javax.swing.JFrame {
         txtSaldoAnterior.setEnabled(false);
         panelResumoSaldo.add(txtSaldoAnterior);
 
-        lbSaldoAtual.setFont(new java.awt.Font("Tahoma", 1, 11));
+        lbSaldoAtual.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbSaldoAtual.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbSaldoAtual.setText("Saldo Atual:");
         panelResumoSaldo.add(lbSaldoAtual);
@@ -640,6 +665,7 @@ public class PFinanceMain extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JSplitPane jSplitPaneCaixa;
     private javax.swing.JLabel lbAvisos;
     private javax.swing.JLabel lbCredito;
     private javax.swing.JLabel lbDebito;
@@ -675,7 +701,8 @@ public class PFinanceMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelTotalMes;
     private javax.swing.JScrollPane scrollItens;
     private javax.swing.JScrollPane scrollMesRef;
-    private javax.swing.JScrollPane scrollTabelaCustos;
+    private javax.swing.JScrollPane scrollTabelaCustosCredito;
+    private javax.swing.JScrollPane scrollTabelaCustosDebito;
     private javax.swing.JSplitPane splitCentral;
     private javax.swing.JSplitPane splitEsquerdo;
     private javax.swing.JPanel statusBar;
@@ -685,7 +712,8 @@ public class PFinanceMain extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabPaneItens;
     private javax.swing.JTabbedPane tabPaneMesRef;
     private javax.swing.JTabbedPane tabPaneMovimentacao;
-    private javax.swing.JTable tabelaCustos;
+    private javax.swing.JTable tabelaCustosCredito;
+    private javax.swing.JTable tabelaCustosDebito;
     private javax.swing.JTable tabelaMesRef;
     private javax.swing.JButton tbAbrir;
     private javax.swing.JButton tbCategorias;
@@ -772,7 +800,7 @@ public class PFinanceMain extends javax.swing.JFrame {
 
         // Inicia responsavel pelos recursos do Caixa
         TabelaCaixa tabCaixa = new TabelaCaixa();
-        tabCaixa.setTabela(tabelaCustos);
+        tabCaixa.setTabela(tabelaCustosCredito);
         tabCaixa.setCampoCredito(txtCredito);
         tabCaixa.setCampoDebito(txtDebito);
         tabCaixa.setCampoSaldoAnterior(txtSaldoAnterior);
