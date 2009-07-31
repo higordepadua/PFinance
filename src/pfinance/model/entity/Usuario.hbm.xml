@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/07/2009 14:06:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="higorlan_pfinance" name="pfinance.model.entity.Usuario" table="usuario">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="usuario" type="string">
+      <column length="40" name="usuario" not-null="true"/>
+    </property>
+    <property name="senha" type="string">
+      <column name="senha" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="100" name="email" not-null="true"/>
+    </property>
+    <property name="dataCadastro" type="timestamp">
+      <column length="19" name="data_cadastro"/>
+    </property>
+    <property name="adm" type="string">
+      <column length="2" name="adm" not-null="true"/>
+    </property>
+    <set inverse="true" name="documentoUsuarios">
+      <key>
+        <column name="usuario_id" not-null="true"/>
+      </key>
+      <one-to-many class="pfinance.model.entity.DocumentoUsuario"/>
+    </set>
+  </class>
+</hibernate-mapping>

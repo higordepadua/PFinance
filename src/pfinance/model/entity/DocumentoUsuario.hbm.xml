@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/07/2009 14:06:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="higorlan_pfinance" name="pfinance.model.entity.DocumentoUsuario" table="documento_usuario">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pfinance.model.entity.Usuario" fetch="select" name="usuario">
+      <column name="usuario_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.Documento" fetch="select" name="documento">
+      <column name="documento_id" not-null="true"/>
+    </many-to-one>
+    <property name="tipoAcesso" type="string">
+      <column length="2" name="tipo_acesso" not-null="true"/>
+    </property>
+    <property name="dataInicio" type="date">
+      <column length="10" name="data_inicio"/>
+    </property>
+    <property name="dataFim" type="date">
+      <column length="10" name="data_fim"/>
+    </property>
+  </class>
+</hibernate-mapping>

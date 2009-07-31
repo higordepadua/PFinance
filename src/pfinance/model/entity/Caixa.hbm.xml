@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/07/2009 14:06:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="higorlan_pfinance" name="pfinance.model.entity.Caixa" table="caixa">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pfinance.model.entity.TipoConta" fetch="select" name="tipoConta">
+      <column name="tipo_conta_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.Documento" fetch="select" name="documento">
+      <column name="documento_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.Categoria" fetch="select" name="categoria">
+      <column name="categoria_id"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.MesRef" fetch="select" name="mesRefByMesRefAnteriorId">
+      <column name="mes_ref_anterior_id"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.Caixa" fetch="select" name="caixa">
+      <column name="caixa_anterior_id"/>
+    </many-to-one>
+    <many-to-one class="pfinance.model.entity.MesRef" fetch="select" name="mesRefByMesRefId">
+      <column name="mes_ref_id" not-null="true"/>
+    </many-to-one>
+    <property name="dataCadastro" type="date">
+      <column length="10" name="data_cadastro"/>
+    </property>
+    <property name="dataInicio" type="date">
+      <column length="10" name="data_inicio"/>
+    </property>
+    <property name="dataPagamento" type="date">
+      <column length="10" name="data_pagamento"/>
+    </property>
+    <property name="valorEsperado" type="double">
+      <column name="valor_esperado" not-null="true" precision="22" scale="0"/>
+    </property>
+    <property name="valorPago" type="java.lang.Double">
+      <column name="valor_pago" precision="22" scale="0"/>
+    </property>
+    <property name="tipoOperacao" type="string">
+      <column length="2" name="tipo_operacao" not-null="true"/>
+    </property>
+    <property name="ultimaAtualizacao" type="timestamp">
+      <column length="19" name="ultima_atualizacao" not-null="true"/>
+    </property>
+    <set inverse="true" name="caixas">
+      <key>
+        <column name="caixa_anterior_id"/>
+      </key>
+      <one-to-many class="pfinance.model.entity.Caixa"/>
+    </set>
+  </class>
+</hibernate-mapping>
